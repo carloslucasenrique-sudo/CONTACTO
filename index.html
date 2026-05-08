@@ -1,142 +1,115 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Suscríbete</title>
-   <style>
-    body {
-        font-family: Arial, sans-serif;
-        background: #264653;
-        color: #F5F3F4;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-    }
-    .form-container {
-        background: #1D3557;
-        padding: 30px;
-        border-radius: 16px;
-        box-shadow: 0 8px 30px rgba(42, 157, 143, 0.4);
-        width: 100%;
-        max-width: 400px;
-        border: 1px solid #2A9D8F;
-    }
-    h2 {
-        text-align: center;
-        margin-bottom: 20px;
-        color: #E9C46A;
-    }
-    label {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: bold;
-        color: #E9C46A;
-    }
-    input[type="email"] {
-        width: 100%;
-        padding: 12px;
-        border: 2px solid #264653;
-        border-radius: 10px;
-        background: #13212E;
-        color: white;
-        box-sizing: border-box;
-        transition: all 0.3s;
-    }
-    input[type="email"]:focus {
-        outline: none;
-        border-color: #2A9D8F;
-        box-shadow: 0 0 0 3px rgba(42, 157, 143, 0.
-</style>                              
-                                   
+<meta charset="UTF-8">
+<title>Contacto</title>
+
+<style>
+body {
+    font-family: Arial;
+    background-color: #f0f8ff;
+    text-align: center;
+}
+
+h2 {
+    color: #4b0082;
+}
+
+form {
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 10px;
+    width: 60%;
+    margin: auto;
+    box-shadow: 0px 0px 10px gray;
+}
+
+input {
+    padding: 8px;
+    margin: 5px;
+    border: 2px solid #87cefa;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #4b0082;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #6a0dad;
+}
+
+table {
+    margin: 20px auto;
+    border-collapse: collapse;
+    width: 70%;
+    background-color: white;
+}
+
+th {
+    background-color: #4b0082;
+    color: white;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+}
+
+tr:nth-child(even) {
+    background-color: #e6e6fa;
+}
+</style>
+
 </head>
 <body>
-    <div class="form-container">
-        <h2>Suscríbete al Newsletter</h2>
-        <form id="subscriptionForm" novalidate>
-            <div class="form-group">
-                <label for="email">Correo electrónico:</label>
-                <input type="email" id="email" name="email" placeholder="ingresa tu correo " required>
-                <div class="error" id="emailError">Ingresa un correo válido. </div>
-            </div>
 
-            <div class="checkbox-group">
-                <input type="checkbox" id="terms" name="terms" required>
-                <label for="terms">Acepto los <a href="#" target="_blank">términos y condiciones</a></label>
-            </div>
-            <div class="error" id="termsError">Debes aceptar los términos y condiciones</div>
+<h2>Formulario de Contacto</h2>
 
-            <button type="submit" id="submitBtn">Suscribirme</button>
-            <div class="success" id="successMsg">¡Gracias por suscribirte! Revisa tu correo.</div>
-        </form>
-    </div>
+<form id="formulario">
+    Nombre: <input type="text" id="nombre" required>
+    Apellido: <input type="text" id="apellido" required>
+    Teléfono: <input type="tel" id="telefono" required>
+    <button type="submit">Enviar</button>
+</form>
 
-    <script>
-        const form = document.getElementById('subscriptionForm');
-        const email = document.getElementById('email');
-        const terms = document.getElementById('terms');
-        const emailError = document.getElementById('emailError');
-        const termsError = document.getElementById('termsError');
-        const successMsg = document.getElementById('successMsg');
-        const submitBtn = document.getElementById('submitBtn');
+<table id="tabla">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Teléfono</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
 
-        // Regex para validar email
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+<script>
+document.getElementById("formulario").addEventListener("submit", function(e) {
+    e.preventDefault();
 
-        function validateEmail() {
-            if (!emailRegex.test(email.value)) {
-                emailError.style.display = 'block';
-                return false;
-            } else {
-                emailError.style.display = 'none';
-                return true;
-            }
-        }
+    let nombre = document.getElementById("nombre").value;
+    let apellido = document.getElementById("apellido").value;
+    let telefono = document.getElementById("telefono").value;
 
-        function validateTerms() {
-            if (!terms.checked) {
-                termsError.style.display = 'block';
-                return false;
-            } else {
-                termsError.style.display = 'none';
-                return true;
-            }
-        }
+    let tabla = document.getElementById("tabla").getElementsByTagName("tbody")[0];
 
-        // Validación en tiempo real
-        email.addEventListener('input', validateEmail);
-        terms.addEventListener('change', validateTerms);
+    let fila = tabla.insertRow();
 
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const isEmailValid = validateEmail();
-            const areTermsValid = validateTerms();
+    fila.insertCell(0).textContent = nombre;
+    fila.insertCell(1).textContent = apellido;
+    fila.insertCell(2).textContent = telefono;
 
-            if (isEmailValid && areTermsValid) {
-                // Aquí conectarías con tu backend, Formspree, Netlify Forms, etc.
-                // Por ahora solo mostramos éxito
-                successMsg.style.display = 'block';
-                submitBtn.disabled = true;
-                submitBtn.textContent = 'Enviado ✓';
-                
-                // Opcional: enviar datos a Formspree
-                // fetch('https://formspree.io/f/TU_ID', {
-                //     method: 'POST',
-                //     body: new FormData(form),
-                //     headers: { 'Accept': 'application/json' }
-                // });
+    document.getElementById("formulario").reset();
+});
+</script>
 
-                setTimeout(() => {
-                    form.reset();
-                    successMsg.style.display = 'none';
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = 'Suscribirme';
-                }, 3000);
-            }
-        });
-    </script>
 </body>
 </html>
